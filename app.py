@@ -2,12 +2,8 @@ from fetch_data_functions.fetch_data import fetch_functions
 from blacklist import blacklist
 from go import go
 import subprocess
-import pandas as pd
 import os
-import re
-from datetime import datetime, timedelta
 import traceback
-import time
 import azure.functions as func
 
 os.makedirs("./input", exist_ok=True)
