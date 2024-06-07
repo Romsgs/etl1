@@ -1,0 +1,32 @@
+trigger:
+- main
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: false
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- task: AzureFunctionApp@2
+  inputs:
+    connectedServiceNameARM: 'ServConn_Engenharia_de_Dados'
+    resourceGroupName: 'rg-engenharia-de-dados'
+    appType: 'functionApp'
+    appName: 'rotinaetlautodesk'
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
