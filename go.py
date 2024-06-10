@@ -19,23 +19,25 @@ def go(hub_id, project_df, project_list_names):
                 hub_id, project_id
             )
             top_folders_df = top_folders_df[
-                top_folders_df["attributes.hidden"] is False
+                top_folders_df["attributes.hidden"] == False
             ]
-            print("---------------")
-            print(top_folders_df.head())
-            print(top_folders_df["attributes.name"])
             regex_para_encontrar_a_pasta_do_prjeto = (
                 r"(^BL\d{4}|Project\s*Files)|(^\d{4}|Project\s*Files)"
             )
+            print(top_folders_df.head())
             top_project_folder = top_folders_df[
                 top_folders_df["attributes.name"].str.contains(
                     regex_para_encontrar_a_pasta_do_prjeto, na=False, regex=True
                 )
             ]
+            if top_project_folder.empty:
+                print(f"No matching folder found for project ID {project_id}")
+                continue
             project_folder_id = top_project_folder["id"].iloc[0]
+            # project_folder_id = top_project_folder["id"]
             if (
-                top_project_folder.empty
-                or top_folders_df is None
+                top_folders_df is None
+                or top_project_folder.empty
                 or top_folders_df.empty
             ):
                 continue
