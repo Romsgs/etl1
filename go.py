@@ -19,7 +19,7 @@ def go(hub_id, project_df, project_list_names):
                 hub_id, project_id
             )
             top_folders_df = top_folders_df[
-                top_folders_df["attributes.hidden"] == False
+                top_folders_df["attributes.hidden"] is False
             ]
             print("---------------")
             print(top_folders_df.head())
