@@ -30,7 +30,7 @@ class FolderService:
         headers = {"Authorization": f"{token['token']}"}
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.get(url, headers=headers, timeout=60.0)
+                response = await client.get(url, headers=headers, timeout=120.0)
                 response.raise_for_status()
                 response_json = pd.json_normalize(response.json().get("data"))
                 return response_json
@@ -48,9 +48,9 @@ class FolderService:
         headers = {"Authorization": f"{token['token']}"}
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.get(url, headers=headers, timeout=60.0)
+                response = await client.get(url, headers=headers, timeout=120.0)
                 response_json = pd.json_normalize(
-                    response.json().get("data"), max_level=10
+                    response.json().get("data"), max_level=50
                 )
                 response.raise_for_status()
                 return response_json

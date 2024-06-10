@@ -20,7 +20,7 @@ class ProjectsService:
         headers = {"Authorization": f"{token['token']}"}
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.get(url, headers=headers, timeout=60.0)
+                response = await client.get(url, headers=headers, timeout=120.0)
                 response.raise_for_status()
                 # return [item['id'] for item in response.json().get('data', [])]
                 return pd.json_normalize(response.json().get("data", []))
@@ -36,7 +36,7 @@ class ProjectsService:
         headers = {"Authorization": f"{token['token']}"}
         async with httpx.AsyncClient() as client:
             try:
-                response = await client.get(url, headers=headers, timeout=60.0)
+                response = await client.get(url, headers=headers, timeout=120.0)
                 response.raise_for_status()
                 pd.json_normalize(response.json().get("data"))
             except httpx.HTTPStatusError as e:

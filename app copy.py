@@ -21,7 +21,7 @@ def main():
         hub_id, projects_df = fetch_hubid_and_projects()
         full_project_list_names = [row for row in projects_df["attributes.name"]]
         project_list_names = [
-            name for name in full_project_list_names if name not in blacklist
+            name for name in full_project_list_names if name in blacklist
         ]
         print(project_list_names)
         go(hub_id, projects_df, project_list_names)

@@ -29,7 +29,7 @@ class RetrieveMetadataDerivativeService:
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.get(
-                    url, headers=headers, timeout=60.0, params=params
+                    url, headers=headers, timeout=120.0, params=params
                 )
                 response.raise_for_status()
                 return pd.json_normalize(response.json().get("data").get("metadata"))
@@ -49,7 +49,7 @@ class RetrieveMetadataDerivativeService:
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.get(
-                    url, headers=headers, timeout=60.0, params=params
+                    url, headers=headers, timeout=120.0, params=params
                 )
                 response.raise_for_status()
                 response_json = pd.json_normalize(response.json().get("data"))
@@ -72,7 +72,7 @@ class RetrieveMetadataDerivativeService:
         async with httpx.AsyncClient() as client:
             try:
                 response = await client.get(
-                    url, headers=headers, timeout=120, params=params
+                    url, headers=headers, timeout=500, params=params
                 )
                 response.raise_for_status()
                 response_json = pd.json_normalize(response.json().get("data"))
