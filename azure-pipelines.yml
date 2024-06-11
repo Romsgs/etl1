@@ -1,0 +1,40 @@
+trigger:
+- slave
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: UsePythonVersion@0
+  inputs:
+    versionSpec: '3.x'
+    addToPath: true
+  displayName: 'Use Python $(python.version)'
+- script: |
+    python -m pip install --upgrade pip
+    pip install -r requirements.txt
+  displayName: 'Install dependencies'
+
+- script: |
+    ls -la $(System.DefaultWorkingDirectory)
+  displayName: 'List files in working directory'
+
+- task: ArchiveFiles@2
+  inputs:
+    rootFolderOrFile: '$(System.DefaultWorkingDirectory)'
+    includeRootFolder: true
+    archiveType: 'zip'
+    archiveFile: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
+    replaceExistingArchive: true
+
+- script: |
+    ls -la $(Build.ArtifactStagingDirectory)
+  displayName: 'List files in artifact staging directory'
+
+- task: AzureFunctionApp@2
+  inputs:
+    connectedServiceNameARM: 'ServConn_Engenharia_de_Dados'
+    resourceGroupName: 'rg-C0Y073'
+    appType: 'functionApp'
+    appName: 'alvo1'
+    package: '$(Build.ArtifactStagingDirectory)/$(Build.BuildId).zip'
