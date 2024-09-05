@@ -27,7 +27,7 @@ const urlSolides = "https://app.tangerino.com.br/Tangerino/pages/LoginPage";
   // Preenche o formulário de login
   await page.type("#idd", codigoEmpregador); // username
   await page.type("#id10", pin); // password
-  // await page.click("#id11");
+  // await page.click("#id11");                                                             DESCOMENTA ISSO PRA ELE CLICAR e bater o ponto
   // Aguarda a navegação para a próxima página
   await page.waitForNavigation();
 
