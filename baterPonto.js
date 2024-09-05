@@ -55,3 +55,10 @@ const urlSolides = "https://app.tangerino.com.br/Tangerino/pages/LoginPage";
 }
 
 */
+
+
+/*   Bat File for task manager.... translate that if youre using linux or mac to its native shell script
+@echo off
+cd /d "C:\Users\RômuloSalobrenhaGarc\dev\tangerino"  
+node baterPonto.js  
+*/
