@@ -34,3 +34,24 @@ const urlSolides = "https://app.tangerino.com.br/Tangerino/pages/LoginPage";
   // Fecha o navegador
   // await browser.close();
 })();
+
+
+/* package json
+{
+  "name": "tangerino",
+  "version": "1.0.0",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "description": "",
+  "dependencies": {
+    "dotenv": "^16.4.5",
+    "puppeteer": "^23.1.1"
+  }
+}
+
+*/
